@@ -33,7 +33,11 @@ function test(name, opts, done) {
 }
 
 describe('postcss-write-svg', function () {
-	it('does something', function (done) {
+	it('inlines an svg', function (done) {
 		test('basic', {}, done);
+	});
+
+	it('inlines an svg with text', function (done) {
+		test('text', {}, done);
 	});
 });

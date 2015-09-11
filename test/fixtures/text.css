@@ -1,0 +1,7 @@
+.arrow {
+	@svg {
+		text {
+			content: ":)";
+		}
+	}
+}

@@ -25,7 +25,11 @@ module.exports = postcss.plugin('postcss-write-svg', function (opts) {
 				if (childNode.type === 'rule') {
 					children.push(createElement(childNode));
 				} else if (childNode.type === 'decl') {
-					attributes[childNode.prop] = childNode.value;
+					if (childNode.prop === 'content') {
+						children.push(childNode.value.replace(/^(['"])(.+)\1$/g, '$2').replace(/</g, '&lt;'));
+					} else {
+						attributes[childNode.prop] = childNode.value;
+					}
 				}
 			});
 
@@ -40,7 +44,7 @@ module.exports = postcss.plugin('postcss-write-svg', function (opts) {
 	function addSVG(atrule) {
 		atrule.parent.append(postcss.decl({
 			prop:  'background-image',
-			value: 'url(data:image/svg+xml;utf8,' + encodeURIComponent(createElement(atrule)) + ')'
+			value: 'url(data:image/svg+xml;utf8,' + encodeURIComponent(createElement(atrule)).replace(/([^\\])\)/, '$1\\)') + ')'
 		}));
 
 		atrule.remove();
