@@ -1,0 +1,8 @@
+.arrow {
+	@svg {
+		polygon {
+			fill: green;
+			points: 50,100 0,0 0,100;
+		}
+	}
+}
