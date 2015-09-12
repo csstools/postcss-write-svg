@@ -1,7 +1,11 @@
 .arrow {
 	@svg {
+		polygon {
+			fill: green;
+			points: 50,100 0,0 0,100;
+		}
 		text {
-			content: ":)";
+			content: "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+{}|:\"<>?¡™£¢∞§¶•ªº–≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷";
 		}
 	}
 }

@@ -10,8 +10,14 @@ module.exports = postcss.plugin('postcss-write-svg', function (opts) {
 		}
 	};
 
+	var svgURI = 'data:image/svg+xml;charset=utf8,';
+
 	function escapeQuotes(string) {
 		return string.replace(/([^\\])"/g, '$1\\"');
+	}
+
+	function escapeSVG(string) {
+		return encodeURIComponent(string).replace(/%3C/g, '<').replace(/%3E/g, '>').replace(/%22/g, '"').replace(/%26/g, '%2526').replace(/[()'"]/g, '\\$&');
 	}
 
 	function createElement(node) {
@@ -44,7 +50,7 @@ module.exports = postcss.plugin('postcss-write-svg', function (opts) {
 	function addSVG(atrule) {
 		atrule.parent.append(postcss.decl({
 			prop:  'background-image',
-			value: 'url(data:image/svg+xml;utf8,' + encodeURIComponent(createElement(atrule)).replace(/([^\\])\)/, '$1\\)') + ')'
+			value: 'url(' + svgURI + escapeSVG(createElement(atrule)) + ')'
 		}));
 
 		atrule.remove();
