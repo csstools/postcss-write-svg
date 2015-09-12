@@ -1,4 +1,7 @@
 .arrow {
+	background-color: white;
+	background-size: cover;
+
 	@svg {
 		polygon {
 			fill: green;
