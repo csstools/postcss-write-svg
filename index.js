@@ -15,7 +15,7 @@ module.exports = postcss.plugin('postcss-write-svg', function () {
 
 	function createXML(node) {
 		var selector   = node.selector;
-		var tagName    = selector ? selector.toLowerCase() : 'svg';
+		var tagName    = selector ? selector : 'svg';
 		var attributes = selector ? {} : { xmlns: 'http://www.w3.org/2000/svg' };
 		var childNodes = node.nodes;
 		var innerXML   = '';
