@@ -106,6 +106,19 @@ grunt.initConfig({
 });
 ```
 
+## Options
+
+#### encoding
+
+Change the encoding/charset of the SVG.
+
+ - Defaults to `utf8`
+ - Possible values: `utf8`, `base64`
+
+*Note:* In IE, SVG's need to be `base64` encoded and will fail otherwise.
+
+
+
 [ci]: https://travis-ci.org/jonathantneal/postcss-write-svg
 [ci-img]: https://travis-ci.org/jonathantneal/postcss-write-svg.svg
 [Gulp PostCSS]: https://github.com/postcss/gulp-postcss
