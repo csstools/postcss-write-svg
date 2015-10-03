@@ -1,14 +1,22 @@
-var path    = require('path');
-var postcss = require('postcss');
-var expect  = require('chai').expect;
-var fs      = require('fs');
+var expect        = require('chai').expect;
+var path          = require('path');
+var fs            = require('fs');
+var postcss       = require('postcss');
+var normalizeNewline = require('normalize-newline');
+
 
 var plugin = require('../');
+
+var encodingMethods = [
+	'utf8',
+	'base64'
+];
 
 function test(name, opts, done) {
 	var fixtureDir = './test/fixtures/';
 	var baseName   = name.split(':')[0];
 	var testName   = name.split(':').join('.');
+
 	var inputPath  = path.resolve(fixtureDir + baseName + '.css');
 	var actualPath = path.resolve(fixtureDir + testName + '.actual.css');
 	var expectPath = path.resolve(fixtureDir + testName + '.expect.css');
@@ -23,7 +31,7 @@ function test(name, opts, done) {
 
 		fs.writeFileSync(actualPath, actualCSS);
 
-		expect(actualCSS).to.eql(expectCSS);
+		expect(normalizeNewline(actualCSS)).to.eql(normalizeNewline(expectCSS));
 		expect(result.warnings()).to.be.empty;
 
 		done();
@@ -33,11 +41,16 @@ function test(name, opts, done) {
 }
 
 describe('postcss-write-svg', function () {
-	it('inlines an svg', function (done) {
-		test('basic', {}, done);
-	});
+	encodingMethods.forEach(function (encodingMethod) {
+		var testWithEncoding = function (testName, testDescription) {
+			it(encodingMethod + ': ' + testDescription, function (done) {
+				test(testName + ':' + encodingMethod, {
+					encoding: encodingMethod
+				}, done);
+			});
+		};
 
-	it('inlines an svg with text', function (done) {
-		test('text', {}, done);
+		testWithEncoding('basic', 'inlines an svg');
+		testWithEncoding('text', 'inlines an svg with text');
 	});
 });
