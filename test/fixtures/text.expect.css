@@ -1,6 +1,3 @@
-.text {
-	background-color: white;
-	background-size: cover;
-
-	background-image: url("data:image/svg+xml;charset=utf8,<svg%20xmlns%3D\"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\"><polygon%20fill%3D\"green\"%20points%3D\"50%2C100%200%2C0%200%2C100\"%2F><text>%601234567890-%3Dqwertyuiop%5B%5D%5C%5Casdfghjkl%3B\'zxcvbnm%2C.%2F~!%40%23%24%25%5E%2526*\(\)_%2B%7B%7D%7C%3A%5C\"%2526lt%3B>%3F%C2%A1%E2%84%A2%C2%A3%C2%A2%E2%88%9E%C2%A7%C2%B6%E2%80%A2%C2%AA%C2%BA%E2%80%93%E2%89%A0%C5%93%E2%88%91%C2%B4%C2%AE%E2%80%A0%C2%A5%C2%A8%CB%86%C3%B8%CF%80%E2%80%9C%E2%80%98%C2%AB%C3%A5%C3%9F%E2%88%82%C6%92%C2%A9%CB%99%E2%88%86%CB%9A%C2%AC%E2%80%A6%C3%A6%CE%A9%E2%89%88%C3%A7%E2%88%9A%E2%88%AB%CB%9C%C2%B5%E2%89%A4%E2%89%A5%C3%B7<%2Ftext><%2Fsvg>")
+.example {
+	background: white url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Crect fill=%22%2300b1ff%22 width=%22100%25%22 height=%22100%25%22/%3E%3Ctext%3E%601234567890-=qwertyuiop%5B%5D%5C%5Casdfghjkl%3B%5Cizxcvbnm%2C./~!%40%23%24%25%5E%2526*%28%29_%2B%7B%7D%7C:%5C%22%2526lt%3B%3E%3F%C2%A1%E2%84%A2%C2%A3%C2%A2%E2%88%9E%C2%A7%C2%B6%E2%80%A2%C2%AA%C2%BA%E2%80%93%E2%89%A0%C5%93%E2%88%91%C2%B4%C2%AE%E2%80%A0%C2%A5%C2%A8%CB%86%C3%B8%CF%80%E2%80%9C%E2%80%98%C2%AB%C3%A5%C3%9F%E2%88%82%C6%92%C2%A9%CB%99%E2%88%86%CB%9A%C2%AC%E2%80%A6%C3%A6%CE%A9%E2%89%88%C3%A7%E2%88%9A%E2%88%AB%CB%9C%C2%B5%E2%89%A4%E2%89%A5%C3%B7%3C/text%3E%3C/svg%3E') cover;
 }

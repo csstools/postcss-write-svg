@@ -2,30 +2,31 @@
 
 <img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
 
-[Write SVG] is a [PostCSS] plugin to write SVGs directly in CSS.
+[Write SVG] lets you write SVGs directly in CSS.
 
 ```css
 /* before */
 
-.arrow {
-    @svg {
-        polygon {
-            fill: green;
-            points: 50,100 0,0 0,100;
-        }
-    }
+@svg square {
+	@rect {
+		fill: var(--color, black);
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.example {
+	background: white svg(square param(--color #00b1ff)) cover;
 }
 
 /* after */
 
-.arrow {
-    background-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpolygon%20fill%3D%22green%22%20points%3D%2250%2C100%200%2C0%200%2C100%22%2F%3E%3C%2Fsvg%3E)
+.example {
+	background: white url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Crect fill=%22%2300b1ff%22 width=%22100%25%22 height=%22100%25%22/%3E%3C/svg%3E') cover;
 }
 ```
 
 ## Usage
-
-Follow these steps to use [Write SVG].
 
 Add [Write SVG] to your build tool:
 
@@ -51,7 +52,7 @@ Load [Write SVG] as a PostCSS plugin:
 
 ```js
 postcss([
-    require('postcss-write-svg')({ /* options */ })
+	require('postcss-write-svg')({ /* options */ })
 ]);
 ```
 
@@ -69,13 +70,13 @@ Enable [Write SVG] within your Gulpfile:
 var postcss = require('gulp-postcss');
 
 gulp.task('css', function () {
-    return gulp.src('./css/src/*.css').pipe(
-        postcss([
-            require('postcss-write-svg')({ /* options */ })
-        ])
-    ).pipe(
-        gulp.dest('./css')
-    );
+	return gulp.src('./css/src/*.css').pipe(
+		postcss([
+			require('postcss-write-svg')({ /* options */ })
+		])
+	).pipe(
+		gulp.dest('./css')
+	);
 });
 ```
 
@@ -93,17 +94,47 @@ Enable [Write SVG] within your Gruntfile:
 grunt.loadNpmTasks('grunt-postcss');
 
 grunt.initConfig({
-    postcss: {
-        options: {
-            processors: [
-                require('postcss-write-svg')({ /* options */ })
-            ]
-        },
-        dist: {
-            src: 'css/*.css'
-        }
-    }
+	postcss: {
+		options: {
+			processors: [
+				require('postcss-write-svg')({ /* options */ })
+			]
+		},
+		dist: {
+			src: 'css/*.css'
+		}
+	}
 });
+```
+
+### Options
+
+#### `encoding`
+
+Type: `String`  
+Default: `utf-8`
+
+Allows you to define the encoding of the SVG.
+```css
+/* before { encoding: 'base64' } */
+
+@svg square {
+	@rect {
+		fill: var(--color, black);
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.example {
+	background: white svg(square param(--color #00b1ff)) cover;
+}
+
+/* after */
+
+.example {
+	background: white url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiMwMGIxZmYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=') cover;
+}
 ```
 
 [ci]: https://travis-ci.org/jonathantneal/postcss-write-svg

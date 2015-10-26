@@ -54,7 +54,7 @@ Pull requests are the greatest contributions, so be sure they are focused in sco
 5. Now [open a pull request] with a clear title and description.
 
 [already been reported]: issues
-[fork]:                  fork
+[fork this project]:     fork
 [live example]:          http://codepen.io/pen
 [open a pull request]:   https://help.github.com/articles/using-pull-requests/
 [reduced test case]:     https://css-tricks.com/reduced-test-cases/
