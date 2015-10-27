@@ -1,0 +1,3 @@
+.foo {
+  border-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%221px%22%3E%3Crect fill=%22red%22 x=%220%22 y=%220%22 w=%22100%25%22 height=%220.5%22/%3E%3C/svg%3E') 2 stretch;
+}

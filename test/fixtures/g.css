@@ -1,0 +1,18 @@
+@svg Triangle {
+	id: svgC;
+	width: 300px;
+	height: 100px;
+	viewBox: 0 0 620 120;
+	preserveAspectRatio: xMidYMid meet;
+	@g {
+		transform: matrix(-0.8615,-0.5077,0.5077,-0.8615,577.307,92.5386);
+		@polyline {
+			points: 0, 30, 15, 0, 30, 30;
+			fill: blue;
+		}
+	}
+}
+
+.foo {
+	background: svg(Triangle) no-repeat;
+}

@@ -11,6 +11,15 @@ var tests = {
 		},
 		'text': {
 			message: 'supports text in SVG'
+		},
+		'1px-border': {
+			message: 'transform 1px border'
+		},
+		'g': {
+			message: 'supports g tag'
+		},
+		'path': {
+			message: 'supports path tag'
 		}
 	}
 };
