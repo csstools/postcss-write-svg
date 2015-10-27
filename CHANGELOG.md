@@ -1,3 +1,7 @@
+## Master
+
+- Updated: Documentation
+
 ## 2.0.0 (2015-10-26)
 
 - Added: Refactored plugin for better multiplexing syntax
