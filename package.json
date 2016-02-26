@@ -1,6 +1,6 @@
 {
   "name": "postcss-write-svg",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Write SVGs directly in CSS",
   "keywords": [
     "postcss",
@@ -20,27 +20,23 @@
   ],
   "author": "Jonathan Neal <jonathantneal@hotmail.com>",
   "license": "CC0-1.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jonathantneal/postcss-write-svg.git"
-  },
-  "bugs": {
-    "url": "https://github.com/jonathantneal/postcss-write-svg/issues"
-  },
-  "homepage": "https://github.com/jonathantneal/postcss-write-svg",
+  "repository": "jonathantneal/postcss-write-svg",
+  "homepage": "https://github.com/jonathantneal/postcss-write-svg#readme",
+  "bugs": "https://github.com/jonathantneal/postcss-write-svg/issues",
   "dependencies": {
-    "postcss": "^5.0.10",
-    "postcss-value-parser": "^3.1.1"
+    "postcss": "^5.0.17",
+    "postcss-value-parser": "^3.3.0"
   },
   "devDependencies": {
-    "eslint": "^1.7.3",
-    "tap-spec": "^4.1.0",
-    "tape": "^4.2.2"
+    "eslint": "^2.2.0",
+    "jscs": "^2.10.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.4.0"
   },
   "scripts": {
-    "lint": "eslint . --ignore-path .gitignore",
-    "test-fixtures": "tape test/*.js | tap-spec",
-    "test": "npm run lint && npm run test-fixtures"
+    "lint": "eslint *.js --ignore-path .gitignore && jscs *.js",
+    "tape": "tape test.js | tap-spec",
+    "test": "npm run lint && npm run tape"
   },
   "engines": {
     "iojs": ">=2.0.0",

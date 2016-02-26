@@ -26,6 +26,10 @@
 }
 ```
 
+The `@svg` at-rule creates a new SVG element available to CSS. This element may be rendered as a data URL by using the `svg()` function. Within an `@svg` at-rule, descendant at-rules (like `@rect`) are transformed into elements, while declarations (like `width`) are transformed into attributes. `var()` functions may also be used, but their values will be compiled when the SVG element is rendered using the `svg()` function. 
+
+The `svg()` function takes the name of your `@svg` at-rule, optionally followed by any number of `param()` functions which may be used to pass in variables that may be used with the `var()` function.
+
 ## Usage
 
 Add [Write SVG] to your build tool:

@@ -20,16 +20,18 @@ var tests = {
 		},
 		'path': {
 			message: 'supports path tag'
+		},
+		'variables': {
+			message: 'supports variable fallbacks'
 		}
 	}
 };
 
-var debug = true;
-var dir   = './test/fixtures/';
+var dir   = './test/';
 
 var fs      = require('fs');
 var path    = require('path');
-var plugin  = require('../');
+var plugin  = require('./');
 var test    = require('tape');
 
 Object.keys(tests).forEach(function (name) {
@@ -42,36 +44,27 @@ Object.keys(tests).forEach(function (name) {
 
 		fixtures.forEach(function (fixture) {
 			var message    = parts[fixture].message;
-			var options    = parts[fixture].options;
+			var options    = Object(parts[fixture].options);
 			var warning    = parts[fixture].warning || 0;
 			var warningMsg = message + ' (# of warnings)';
 
 			var baseName   = fixture.split(':')[0];
-			var testName   = fixture.split(':').join('.');
 
 			var inputPath  = path.resolve(dir + baseName + '.css');
-			var expectPath = path.resolve(dir + testName + '.expect.css');
-			var actualPath = path.resolve(dir + testName + '.actual.css');
+
+			options.from = inputPath;
 
 			var inputCSS = '';
 			var expectCSS = '';
 
 			try {
-				inputCSS = fs.readFileSync(inputPath,  'utf8');
+				inputCSS = expectCSS = fs.readFileSync(inputPath,  'utf8');
 			} catch (error) {
 				fs.writeFileSync(inputPath, inputCSS);
 			}
 
-			try {
-				expectCSS = fs.readFileSync(expectPath,  'utf8');
-			} catch (error) {
-				fs.writeFileSync(expectPath, expectCSS);
-			}
-
 			plugin.process(inputCSS, options).then(function (result) {
 				var actualCSS = result.css;
-
-				if (debug) fs.writeFileSync(actualPath, actualCSS);
 
 				t.equal(actualCSS, expectCSS, message);
 

@@ -1,6 +1,9 @@
-## Master
+## 2.1.0
 
-- Updated: Documentation
+- Added: Fixed support for `var()` fallback values
+- Added: Lint configurations
+- Added: Smaller UTF-8 encoding
+- Updated: Documentation and dependencies
 
 ## 2.0.0 (2015-10-26)
 
