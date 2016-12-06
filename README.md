@@ -1,6 +1,10 @@
-# Write SVG [![Build Status][ci-img]][ci] [![NPM Version][npm-img]][npm]
+# Write SVG <a href="https://github.com/postcss/postcss"><img src="https://postcss.github.io/postcss/logo.svg" alt="PostCSS Logo" width="90" height="90" align="right"></a>
 
-<img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
+[![NPM Version][npm-img]][npm-url]
+[![Build Status][cli-img]][cli-url]
+[![Licensing][lic-image]][lic-url]
+[![Changelog][log-image]][log-url]
+[![Gitter Chat][git-image]][git-url]
 
 [Write SVG] lets you write SVGs directly in CSS.
 
@@ -10,38 +14,69 @@
 @svg square {
 	@rect {
 		fill: var(--color, black);
+		width: var(--size);
+		height: var(--size);
+	}
+}
+
+.example {
+	background: svg(square param(--color green) param(--size 100%)) center / cover;
+}
+
+/* after */
+
+.example {
+	background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='green' width='100%25' height='100%25'/%3E%3C/svg%3E") center / cover;
+}
+```
+
+`@svg` at-rules generate SVG elements available to CSS. Within an `@svg`, descendant at-rules (like `@rect`) are interpreted as elements, while declarations (like `width`) are interpreted as attributes.
+
+The `svg()` function renders an `@svg` as a data `url()`. `var()` functions within an `@svg` honor the variables passed in through `param()` functions.
+
+## Options
+
+#### `utf8`
+
+Type: `Boolean`  
+Default: `true`
+
+Allows you to define whether UTF-8 or base64 encoding will be used.
+
+```css
+/* before { utf8: false } */
+
+@svg square {
+	@rect {
+		fill: black;
 		width: 100%;
 		height: 100%;
 	}
 }
 
 .example {
-	background: white svg(square param(--color #00b1ff)) cover;
+	background: svg(square);
 }
 
 /* after */
 
 .example {
-	background: white url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Crect fill=%22%2300b1ff%22 width=%22100%25%22 height=%22100%25%22/%3E%3C/svg%3E') cover;
+	background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9ImJsYWNrIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIi8+PC9zdmc+");
 }
 ```
-
-The `@svg` at-rule creates a new SVG element available to CSS. This element may be rendered as a data URL by using the `svg()` function. Within an `@svg` at-rule, descendant at-rules (like `@rect`) are transformed into elements, while declarations (like `width`) are transformed into attributes. `var()` functions may also be used, but their values will be compiled when the SVG element is rendered using the `svg()` function. 
-
-The `svg()` function takes the name of your `@svg` at-rule, optionally followed by any number of `param()` functions which may be used to pass in variables that may be used with the `var()` function.
 
 ## Usage
 
 Add [Write SVG] to your build tool:
 
 ```bash
-npm install postcss-write-svg --save-dev
+npm install jonathantneal/postcss-write-svg --save-dev
 ```
 
 #### Node
 
 ```js
-require('postcss-write-svg')({ /* options */ }).process(YOUR_CSS);
+require('postcss-write-svg').process(YOUR_CSS, { /* options */ });
 ```
 
 #### PostCSS
@@ -57,7 +92,7 @@ Load [Write SVG] as a PostCSS plugin:
 ```js
 postcss([
 	require('postcss-write-svg')({ /* options */ })
-]);
+]).process(YOUR_CSS, /* options */);
 ```
 
 #### Gulp
@@ -74,12 +109,12 @@ Enable [Write SVG] within your Gulpfile:
 var postcss = require('gulp-postcss');
 
 gulp.task('css', function () {
-	return gulp.src('./css/src/*.css').pipe(
+	return gulp.src('./src/*.css').pipe(
 		postcss([
 			require('postcss-write-svg')({ /* options */ })
 		])
 	).pipe(
-		gulp.dest('./css')
+		gulp.dest('.')
 	);
 });
 ```
@@ -100,55 +135,29 @@ grunt.loadNpmTasks('grunt-postcss');
 grunt.initConfig({
 	postcss: {
 		options: {
-			processors: [
+			use: [
 				require('postcss-write-svg')({ /* options */ })
 			]
 		},
 		dist: {
-			src: 'css/*.css'
+			src: '*.css'
 		}
 	}
 });
 ```
 
-### Options
+[npm-url]: https://www.npmjs.com/package/postcss-write-svg
+[npm-img]: https://img.shields.io/npm/v/postcss-write-svg.svg
+[cli-url]: https://travis-ci.org/jonathantneal/postcss-write-svg
+[cli-img]: https://img.shields.io/travis/jonathantneal/postcss-write-svg.svg
+[lic-url]: LICENSE.md
+[lic-image]: https://img.shields.io/npm/l/postcss-write-svg.svg
+[log-url]: CHANGELOG.md
+[log-image]: https://img.shields.io/badge/changelog-md-blue.svg
+[git-url]: https://gitter.im/postcss/postcss
+[git-image]: https://img.shields.io/badge/chat-gitter-blue.svg
 
-#### `encoding`
-
-Type: `String`  
-Default: `utf-8`  
-Possible Values: `utf-8`, `base64`
-
-Allows you to define the encoding of an SVG.
-
-```css
-/* before { encoding: 'base64' } */
-
-@svg square {
-	@rect {
-		fill: var(--color, black);
-		width: 100%;
-		height: 100%;
-	}
-}
-
-.example {
-	background: white svg(square param(--color #00b1ff)) cover;
-}
-
-/* after */
-
-.example {
-	background: white url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiMwMGIxZmYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=') cover;
-}
-```
-
-[ci]:      https://travis-ci.org/jonathantneal/postcss-write-svg
-[ci-img]:  https://travis-ci.org/jonathantneal/postcss-write-svg.svg
-[npm]:     https://www.npmjs.com/package/postcss-write-svg
-[npm-img]: https://badge.fury.io/js/postcss-write-svg.svg
-
-[Gulp PostCSS]:  https://github.com/postcss/gulp-postcss
+[Write SVG]: https://github.com/jonathantneal/postcss-write-svg
+[PostCSS]: https://github.com/postcss/postcss
+[Gulp PostCSS]: https://github.com/postcss/gulp-postcss
 [Grunt PostCSS]: https://github.com/nDmitry/grunt-postcss
-[PostCSS]:       https://github.com/postcss/postcss
-[Write SVG]:     https://github.com/jonathantneal/postcss-write-svg

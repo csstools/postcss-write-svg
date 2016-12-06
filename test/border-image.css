@@ -1,0 +1,14 @@
+@svg 1px-border {
+	height: 2px;
+
+	@rect {
+		fill: var(--color, black);
+		width: 100%;
+		height: 50%;
+	}
+}
+
+.example {
+	border: 10px solid transparent;
+	border-image: svg(1px-border param(--color #00b1ff)) 2 2 stretch;
+}

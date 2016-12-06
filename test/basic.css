@@ -1,3 +1,11 @@
+@svg square {
+	@rect {
+		fill: var(--color, black);
+		width: var(--size);
+		height: var(--size);
+	}
+}
+
 .example {
-	background: white url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IGZpbGw9IiMwMGIxZmYiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48L3N2Zz4=") cover;
+	background: white svg(square param(--color #00b1ff) param(--size 100%)) center / cover;
 }

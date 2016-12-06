@@ -1,7 +1,50 @@
 {
   "name": "postcss-write-svg",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Write SVGs directly in CSS",
+  "author": "Jonathan Neal <jonathantneal@hotmail.com>",
+  "license": "CC0-1.0",
+  "repository": "jonathantneal/postcss-write-svg",
+  "homepage": "https://github.com/jonathantneal/postcss-write-svg#readme",
+  "bugs": "https://github.com/jonathantneal/postcss-write-svg/issues",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "echint && eslint index.js && jscs index.js",
+    "prepublish": "npm test",
+    "tape": "postcss-tape",
+    "test": "npm run lint && postcss-tape"
+  },
+  "engines": {
+    "node": ">=6.9.1"
+  },
+  "dependencies": {
+    "postcss": "^5.2.6",
+    "postcss-value-parser": "^3.3.0"
+  },
+  "devDependencies": {
+    "echint": "^2.1.0",
+    "echint-config-dev": "1.0.0",
+    "eslint": "^3.11.1",
+    "eslint-config-dev": "1.0.0",
+    "jscs": "^3.0.7",
+    "jscs-config-dev": "1.0.1",
+    "postcss-tape": "1.0.1"
+  },
+  "echint": {
+    "extends": "dev"
+  },
+  "eslintConfig": {
+    "extends": "dev",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "jscsConfig": {
+    "preset": "dev"
+  },
   "keywords": [
     "postcss",
     "css",
@@ -17,29 +60,5 @@
     "params",
     "vars",
     "variables"
-  ],
-  "author": "Jonathan Neal <jonathantneal@hotmail.com>",
-  "license": "CC0-1.0",
-  "repository": "jonathantneal/postcss-write-svg",
-  "homepage": "https://github.com/jonathantneal/postcss-write-svg#readme",
-  "bugs": "https://github.com/jonathantneal/postcss-write-svg/issues",
-  "dependencies": {
-    "postcss": "^5.0.17",
-    "postcss-value-parser": "^3.3.0"
-  },
-  "devDependencies": {
-    "eslint": "^2.2.0",
-    "jscs": "^2.10.1",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.4.0"
-  },
-  "scripts": {
-    "lint": "eslint *.js --ignore-path .gitignore && jscs *.js",
-    "tape": "tape test.js | tap-spec",
-    "test": "npm run lint && npm run tape"
-  },
-  "engines": {
-    "iojs": ">=2.0.0",
-    "node": ">=0.12.0"
-  }
+  ]
 }
