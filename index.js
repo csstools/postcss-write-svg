@@ -5,7 +5,7 @@ const parser  = require('postcss-value-parser');
 // plugin
 module.exports = postcss.plugin('postcss-place', ({
 	utf8 = true
-}) => (root) => {
+} = {}) => (root) => {
 	// all extracted @svg at-rules by name
 	const svgs = extractSVGReferences(root);
 
@@ -19,8 +19,15 @@ module.exports = postcss.plugin('postcss-place', ({
 	});
 });
 
+// override plugin#process
+module.exports.process = function (cssString, pluginOptions, processOptions) {
+	return postcss([
+		0 in arguments ? module.exports(pluginOptions) : module.exports()
+	]).process(cssString, processOptions);
+};
+
 // all extracted @svg at-rules by name
-function extractSVGReferences(root) {
+const extractSVGReferences = (root) => {
 	// svg at-rules by name
 	const svgs = {};
 
@@ -31,7 +38,7 @@ function extractSVGReferences(root) {
 	});
 
 	return svgs;
-}
+};
 
 // whether the declaration has an svg() function
 const hasSVGFunction = (decl) => (/svg\(.+\)/).test(decl.value);

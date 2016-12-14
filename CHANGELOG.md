@@ -1,6 +1,11 @@
 # Changes to Write SVG
 
-### 3.0.0 (November 27, 2016)
+### 3.0.1 (December 8, 2016)
+
+- Updated: Use destructing assignment on plugin options
+- Updated: Use template literals
+
+### 3.0.0 (December 6, 2016)
 
 - Updated: Rewrote plugin
 - Updated: Rewrote tests
