@@ -23,7 +23,7 @@
 	background: svg(square param(--color green) param(--size 100%)) center / cover;
 }
 
-/* after */
+/* after the  */
 
 .example {
 	background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='green' width='100%25' height='100%25'/%3E%3C/svg%3E") center / cover;
